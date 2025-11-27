@@ -25,7 +25,9 @@ export class NavigationService {
   getNavigationItems(): Observable<NavigationItem[]> {
     // 直接回傳預設的導航項目
     return of(this.getDefaultNavigationItems());
-  }  /**
+  }
+
+  /**
    * 取得預設的導航項目
    * @returns NavigationItem[]
    */

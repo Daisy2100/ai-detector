@@ -2,7 +2,8 @@
   <div class="max-w-7xl mx-auto px-8">
     <div class="nav-container">
       <!-- Logo -->
-      <a routerLink="/" class="logo-link">{{ logoText }}</a>      <!-- Desktop Menu (Hidden on mobile) -->
+      <a routerLink="/" class="logo-link">{{ logoText }}</a>
+      <!-- Desktop Menu (Hidden on mobile) -->
       <nav class="desktop-menu" *ngIf="!isLoading">
         <ul class="nav-links">
           <li *ngFor="let item of navigationItems; trackBy: trackByNavItem">
@@ -60,7 +61,8 @@
     <button class="close-btn" (click)="closeSidebar()" aria-label="Close menu">
       <span class="close-line"></span>
       <span class="close-line"></span>
-    </button>    <!-- Menu Items -->
+    </button>
+    <!-- Menu Items -->
     <nav class="overlay-nav" *ngIf="!isLoading">
       <ul class="overlay-menu-list">
         <li><a routerLink="/" (click)="closeSidebar()" class="overlay-menu-link">Top</a></li>
