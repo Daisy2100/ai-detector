@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 export interface DetectionResult {
   prediction: 'AI' | 'Human' | 'Uncertain' | 'Unknown';
@@ -25,7 +26,7 @@ export interface DetectionError {
   providedIn: 'root'
 })
 export class AiDetectorService {
-  private apiUrl = '/api/detect';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 

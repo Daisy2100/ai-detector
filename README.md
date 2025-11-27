@@ -4,6 +4,8 @@
 
 **參考網站：** [justdone.com/ai-detector](https://justdone.com/ai-detector)
 
+**部署網址：** [ai-detector.daisy2100.com](https://ai-detector.daisy2100.com)
+
 ### 📋 專案說明
 
 這是一個 AI 內容檢測 Web 應用程式，可以分析輸入的文本，判斷該文本是由「AI 生成」或「人類撰寫」。
@@ -11,39 +13,52 @@
 ### 🏗️ 專案架構
 
 - **前端技術：** Angular 19 + Tailwind CSS + PrimeNG
-- **後端技術：** Python (FastAPI) + TF-IDF + Logistic Regression
-- **部署環境：** Vercel Serverless Function
+- **後端技術：** Python + TF-IDF + Logistic Regression
+- **前端部署：** GCP VM
+- **後端部署：** Vercel Serverless Function
 
 ### 📁 專案結構
 
 ```
 ai-detector/
-├── api/
-│   └── detect.py          # Python API (Vercel Serverless Function)
-├── src/
-│   ├── app/
-│   │   ├── components/    # Angular 共用元件
-│   │   ├── pages/         # 頁面元件
-│   │   └── services/      # API 服務
-│   └── assets/            # 靜態資源
-├── vercel.json            # Vercel 部署設定
-├── angular.json           # Angular 設定
-└── package.json           # NPM 依賴
+├── backend/
+│   ├── detect.py          # Python API (Vercel Serverless Function)
+│   ├── requirements.txt   # Python 依賴
+│   └── vercel.json        # Vercel 部署設定
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── components/    # Angular 共用元件
+│   │   │   ├── pages/         # 頁面元件
+│   │   │   └── services/      # API 服務
+│   │   └── assets/            # 靜態資源
+│   ├── angular.json           # Angular 設定
+│   └── package.json           # NPM 依賴
+├── .github/
+│   └── workflows/
+│       └── deploy-frontend.yml  # 前端 CI/CD
+└── README.md
 ```
 
 ### 🚀 本地開發
 
-1. 安裝依賴
-```bash
-npm install
-```
+#### 前端
 
-2. 啟動開發伺服器
 ```bash
+cd frontend
+npm install
 npm start
 ```
 
-3. 開啟瀏覽器訪問 http://localhost:4200
+開啟瀏覽器訪問 http://localhost:4200
+
+#### 後端
+
+```bash
+cd backend
+# 後端使用 Python 標準庫，無需額外安裝
+python detect.py
+```
 
 ### 🔧 API 端點
 
