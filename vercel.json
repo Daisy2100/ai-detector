@@ -2,18 +2,25 @@
   "version": 2,
   "builds": [
     {
-      "src": "detect.py",
+      "src": "backend/detect.py",
       "use": "@vercel/python"
+    },
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
     }
   ],
   "routes": [
     {
       "src": "/api/detect",
-      "dest": "/detect.py"
+      "dest": "/backend/detect.py"
     },
     {
-      "src": "/api/detect/(.*)",
-      "dest": "/detect.py"
+      "src": "/(.*)",
+      "dest": "/frontend/$1"
     }
   ],
   "headers": [
