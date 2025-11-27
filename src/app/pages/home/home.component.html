@@ -1,0 +1,137 @@
+<div class="detector-section">
+  <div class="detector-container">
+    <div class="detector-content">
+      <!-- Header -->
+      <div class="header-section">
+        <h1 class="detector-title">
+          AI Content Detector
+        </h1>
+        <p class="detector-subtitle">
+          Detect whether text is AI-generated or human-written using machine learning.
+        </p>
+        <p class="reference-link">
+          Reference: <a href="https://justdone.com/ai-detector" target="_blank" rel="noopener noreferrer">justdone.com/ai-detector</a>
+        </p>
+      </div>
+
+      <!-- Input Section -->
+      <div class="input-section">
+        <div class="textarea-wrapper">
+          <textarea
+            [(ngModel)]="inputText"
+            placeholder="Paste or type your text here to analyze... (minimum 50 characters)"
+            class="text-input"
+            rows="10"
+          ></textarea>
+          <div class="text-stats">
+            <span>{{ characterCount }} characters</span>
+            <span>{{ wordCount }} words</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <p-button
+            label="Analyze Text"
+            icon="pi pi-search"
+            (click)="detectText()"
+            [loading]="isLoading"
+            [disabled]="characterCount < 50 || isLoading"
+            styleClass="analyze-btn"
+          ></p-button>
+          <p-button
+            label="Clear"
+            icon="pi pi-trash"
+            (click)="clearText()"
+            [disabled]="isLoading"
+            styleClass="p-button-outlined clear-btn"
+          ></p-button>
+        </div>
+
+        <p *ngIf="errorMessage" class="error-message">
+          <i class="pi pi-exclamation-circle"></i>
+          {{ errorMessage }}
+        </p>
+      </div>
+
+      <!-- Results Section -->
+      <div *ngIf="result" class="results-section" [ngClass]="getResultClass()">
+        <h2 class="results-title">Analysis Results</h2>
+
+        <div class="result-main">
+          <div class="prediction-badge" [ngClass]="getResultClass()">
+            <i [ngClass]="{
+              'pi pi-robot': result.prediction === 'AI',
+              'pi pi-user': result.prediction === 'Human',
+              'pi pi-question-circle': result.prediction === 'Uncertain' || result.prediction === 'Unknown'
+            }"></i>
+            <span>{{ result.prediction }}</span>
+          </div>
+          <p class="result-message">{{ result.message }}</p>
+        </div>
+
+        <div class="probability-section">
+          <div class="probability-bar">
+            <div class="probability-labels">
+              <span class="human-label">
+                <i class="pi pi-user"></i>
+                Human: {{ result.human_probability }}%
+              </span>
+              <span class="ai-label">
+                <i class="pi pi-robot"></i>
+                AI: {{ result.ai_probability }}%
+              </span>
+            </div>
+            <div class="progress-container">
+              <div
+                class="progress-fill"
+                [style.width.%]="result.ai_probability"
+                [style.background]="getProgressBarColor()"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-grid" *ngIf="result.features">
+          <div class="stat-card">
+            <span class="stat-label">Word Count</span>
+            <span class="stat-value">{{ result.word_count }}</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Avg. Sentence Length</span>
+            <span class="stat-value">{{ result.features.avg_sentence_length }} words</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Vocabulary Richness</span>
+            <span class="stat-value">{{ result.features.vocabulary_richness }}%</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Formality Score</span>
+            <span class="stat-value">{{ result.features.formality_score }}%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- How it Works Section -->
+      <div class="info-section">
+        <h3 class="info-title">How it Works</h3>
+        <div class="info-grid">
+          <div class="info-card">
+            <i class="pi pi-file-edit"></i>
+            <h4>Input Text</h4>
+            <p>Paste or type any text you want to analyze. Minimum 50 characters required for accurate results.</p>
+          </div>
+          <div class="info-card">
+            <i class="pi pi-cog"></i>
+            <h4>Analysis</h4>
+            <p>Our TF-IDF + Logistic Regression model analyzes linguistic patterns and features.</p>
+          </div>
+          <div class="info-card">
+            <i class="pi pi-chart-bar"></i>
+            <h4>Results</h4>
+            <p>Get a detailed breakdown showing the probability of AI-generated vs human-written content.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
