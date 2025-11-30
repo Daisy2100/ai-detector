@@ -4,7 +4,7 @@
 
 **參考網站：** [justdone.com/ai-detector](https://justdone.com/ai-detector)
 
-**部署網址：** [ai-detector.daisy2100.com](https://ai-detector.daisy2100.com)
+**部署網址：** [daisy2100 AI Detector (Vercel)](https://daisy2100-ai-detector-z1tm95w8f-daisys-projects-45695f9e.vercel.app)
 
 ### 📋 專案說明
 
