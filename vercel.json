@@ -1,26 +1,10 @@
 {
-  "version": 2,
-  "builds": [
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "rewrites": [
     {
-      "src": "backend/detect.py",
-      "use": "@vercel/python"
-    },
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/detect",
-      "dest": "/backend/detect.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/$1"
+      "source": "/api/detect",
+      "destination": "/api/detect"
     }
   ],
   "headers": [
